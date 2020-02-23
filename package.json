@@ -1,0 +1,49 @@
+{
+  "name": "ts-ink",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/lodash": "4.14.149",
+    "@types/node": "^13.7.0",
+    "@types/prettier": "1.19.0",
+    "@types/react": "16.9.19",
+    "@types/react-reconciler": "^0.18.0",
+    "@types/yoga-layout": "^1.9.1",
+    "prettier": "^1.19.1",
+    "react": "^16.12.0",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.8.2"
+  },
+  "scripts": {
+    "start:dev": "ts-node-dev --poll ./tests/Test.tsx"
+  },
+  "dependencies": {
+    "add": "^2.0.6",
+    "ansi-escapes": "^4.3.0",
+    "arrify": "^2.0.1",
+    "auto-bind": "^4.0.0",
+    "chalk": "^3.0.0",
+    "cli-cursor": "^3.1.0",
+    "cli-truncate": "^2.1.0",
+    "lodash": "^4.17.15",
+    "log-update": "^4.0.0",
+    "react-reconciler": "^0.24.0",
+    "signal-exit": "^3.0.2",
+    "slice-ansi": "^4.0.0",
+    "string-length": "^4.0.0",
+    "widest-line": "^3.1.0",
+    "wrap-ansi": "^6.2.0",
+    "yoga-layout": "^1.9.3"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "semi": false
+  },
+  "resolutions": {
+    "@types/react": "16.9.19"
+  }
+}
