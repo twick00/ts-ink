@@ -38,6 +38,7 @@ const Color = ({children, ...colorProps}) => {
   };
 
   return (
+  // @ts-ignore
     <span style={{flexDirection: 'row'}} unstable__transformChildren={transformChildren}>
     {children}
     </span>

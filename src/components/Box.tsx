@@ -3,43 +3,43 @@ import React, { PureComponent, ReactNode } from 'react'
 import PropTypes from 'prop-types'
 
 type BoxProps = {
-  margin: number
-  marginX: number
-  marginY: number
-  marginTop: number
-  marginBottom: number
-  marginLeft: number
-  marginRight: number
-  padding: number
-  paddingX: number
-  paddingY: number
-  paddingTop: number
-  paddingBottom: number
-  paddingLeft: number
-  paddingRight: number
-  width: number
-  minWidth: number
-  height: number
-  minHeight: number
-  flexGrow: number
-  flexShrink: number
-  flexDirection: 'row' | 'row-reverse' | 'column' | 'column-reverse'
-  flexBasis: number | string
-  alignItems: 'stretch' | 'flex-start' | 'center' | 'flex-end'
-  justifyContent:
+  margin?: number
+  marginX?: number
+  marginY?: number
+  marginTop?: number
+  marginBottom?: number
+  marginLeft?: number
+  marginRight?: number
+  padding?: number
+  paddingX?: number
+  paddingY?: number
+  paddingTop?: number
+  paddingBottom?: number
+  paddingLeft?: number
+  paddingRight?: number
+  width?: number
+  minWidth?: number
+  height?: number
+  minHeight?: number
+  flexGrow?: number
+  flexShrink?: number
+  flexDirection?: 'row' | 'row-reverse' | 'column' | 'column-reverse'
+  flexBasis?: number | string
+  alignItems?: 'stretch' | 'flex-start' | 'center' | 'flex-end'
+  justifyContent?:
     | 'flex-start'
     | 'center'
     | 'flex-end'
     | 'space-between'
     | 'space-around'
-  textWrap:
+  textWrap?:
     | 'wrap'
     | 'truncate'
     | 'truncate-start'
     | 'truncate-middle'
     | 'truncate-end'
-  unstable__transformChildren: Function
-  children: ReactNode
+  unstable__transformChildren?: Function
+  children?: ReactNode
 }
 
 export default class Box extends PureComponent<BoxProps> {
