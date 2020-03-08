@@ -13,5 +13,5 @@
     "importHelpers": true,
     "types": ["node", "jest"]
   },
-  "include": ["src"]
+  "include": ["index.ts"]
 }

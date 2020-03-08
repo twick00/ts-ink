@@ -1,7 +1,8 @@
 {
   "name": "ts-ink",
   "version": "1.0.0",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "license": "MIT",
   "devDependencies": {
     "@types/ci-info": "^2.0.0",
@@ -28,7 +29,9 @@
     "typescript": "^3.8.2"
   },
   "scripts": {
-    "start:dev": "ts-node-dev --poll test/fixtures/Counter.tsx"
+    "start:dev": "ts-node-dev --poll test/fixtures/Counter.tsx",
+    "test": "yarn jest",
+    "prepublish": "tsc"
   },
   "dependencies": {
     "add": "^2.0.6",

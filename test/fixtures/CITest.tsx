@@ -17,7 +17,7 @@ const CITest = () => {
   }
 
   React.useEffect(() => {
-    const timer = setTimeout(onTimeout, 100)
+    const timer = setTimeout(onTimeout, 10)
     return () => clearTimeout(timer)
   })
 

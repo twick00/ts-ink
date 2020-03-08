@@ -7,5 +7,10 @@ module.exports = {
   testRegex: '(test.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
   testPathIgnorePatterns: ['/fixtures/', '/helpers/', '/lib/'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
-  collectCoverage: true
+  collectCoverage: true,
+  globals: {
+    'ts-jest': {
+      packageJson: 'package.json',
+    },
+  },
 }

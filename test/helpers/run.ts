@@ -1,15 +1,10 @@
 import { spawn } from 'node-pty'
-import yarnVersion from './yarnVersion'
 
 export default (fixture: string, { env }: { env?: any } = {}) => {
-  const command = yarnVersion().startsWith('2')
-    ? { cmd: 'yarn', opts: [] }
-    : { cmd: 'yarn', opts: ['--silent'] }
-
   return new Promise<string>((resolve, reject) => {
     const term = spawn(
-      command.cmd,
-      [...command.opts, 'ts-node', `${__dirname}/../fixtures/${fixture}`],
+      'yarn',
+      ['ts-node', `${__dirname}/../fixtures/${fixture}`],
       {
         name: 'xterm-color',
         cols: 100,
