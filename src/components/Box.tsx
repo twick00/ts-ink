@@ -37,12 +37,12 @@ type BoxProps = {
     | 'truncate-start'
     | 'truncate-middle'
     | 'truncate-end'
-  unstable__transformChildren?: Function
+  _unstable__transformChildren?: Function
   children?: ReactNode
 }
 
 const Box = (props: BoxProps) => {
-  const { children, unstable__transformChildren, ...style } = props
+  const { children, _unstable__transformChildren, ...style } = props
   const nodeRef = React.useRef()
 
   return (
@@ -50,7 +50,7 @@ const Box = (props: BoxProps) => {
       ref={nodeRef}
       style={style}
       // @ts-ignore
-      unstable__transformChildren={unstable__transformChildren}
+      _unstable__transformChildren={_unstable__transformChildren}
     >
       {children}
     </div>

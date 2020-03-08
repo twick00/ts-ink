@@ -86,8 +86,8 @@ describe('Box component', () => {
   })
   it('should correctly apply transformChildren', () => {
     const output = renderToString(
-      <Box unstable__transformChildren={(str: string) => `[${str}]`}>
-        <Box unstable__transformChildren={(str: string) => `{${str}}`}>
+      <Box _unstable__transformChildren={(str: string) => `[${str}]`}>
+        <Box _unstable__transformChildren={(str: string) => `{${str}}`}>
           hello world
         </Box>
       </Box>
@@ -96,8 +96,8 @@ describe('Box component', () => {
   })
   it('should squash multiple nested text nodes', () => {
     const output = renderToString(
-      <Box unstable__transformChildren={(str: string) => `[${str}]`}>
-        <Box unstable__transformChildren={(str: string) => `{${str}}`}>
+      <Box _unstable__transformChildren={(str: string) => `[${str}]`}>
+        <Box _unstable__transformChildren={(str: string) => `{${str}}`}>
           hello
           <Text> world</Text>
         </Box>

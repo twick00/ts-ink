@@ -43,8 +43,8 @@ const squashTextNodes = (node:InkElement) => {
 
     // Since these text nodes are being concatenated, `Output` instance won't be able to
     // apply children transform, so we have to do it manually here for each text node
-    if (childNode.unstable__transformChildren) {
-      nodeText = childNode.unstable__transformChildren(nodeText);
+    if (childNode._unstable__transformChildren && typeof childNode._unstable__transformChildren === 'function') {
+      nodeText = childNode._unstable__transformChildren(nodeText);
     }
 
     text += nodeText;
@@ -68,15 +68,15 @@ export const renderNodeToOutput = (
     skipStaticElements?: boolean
   }
 ) => {
-  if (node.unstable__static && skipStaticElements) {
+  if (node._unstable__static && skipStaticElements) {
     return
   }
   const {yogaNode} = node
   const x = offsetX + yogaNode.getComputedLeft()
   const y = offsetY + yogaNode.getComputedTop()
   let newTransformers = transformers;
-  if (node.unstable__transformChildren) {
-    newTransformers.unshift(node.unstable__transformChildren)
+  if (node._unstable__transformChildren) {
+    newTransformers.unshift(node._unstable__transformChildren)
   }
 
   // Nodes with only text inside

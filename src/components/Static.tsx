@@ -29,7 +29,7 @@ const Static = ({ children, ...otherProps }: StaticProps) => {
   return (
     <div
       // @ts-ignore
-      unstable__static={true}
+      _unstable__static={true}
       style={{
         position: 'absolute',
         flexDirection: 'column',

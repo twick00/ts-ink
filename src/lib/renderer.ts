@@ -6,11 +6,11 @@ import Output from './output'
 import { renderNodeToOutput } from './renderNodeToOutput'
 
 const findStaticNode: (node: InkElement) => InkElement = node => {
-  if (node.unstable__static) {
+  if (node._unstable__static) {
     return node
   }
   for (const childNode of node.childNodes) {
-    if (childNode.unstable__static) {
+    if (childNode._unstable__static) {
       return childNode
     }
     if (

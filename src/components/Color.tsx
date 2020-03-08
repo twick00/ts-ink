@@ -46,7 +46,7 @@ const Color = ({
     <span
       style={{ flexDirection: 'row' }}
       // @ts-ignore //
-      unstable__transformChildren={transformChildren}
+      _unstable__transformChildren={transformChildren}
     >
       {children}
     </span>

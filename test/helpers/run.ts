@@ -1,13 +1,15 @@
-import { EOL } from 'os'
 import { spawn } from 'node-pty'
-import ProcessEnv = NodeJS.ProcessEnv
-import fs from 'fs'
+import yarnVersion from './yarnVersion'
 
 export default (fixture: string, { env }: { env?: any } = {}) => {
+  const command = yarnVersion().startsWith('2')
+    ? { cmd: 'yarn', opts: [] }
+    : { cmd: 'yarn', opts: ['--silent'] }
+
   return new Promise<string>((resolve, reject) => {
     const term = spawn(
-      'yarn',
-      ['--silent', 'ts-node', `${__dirname}/../fixtures/${fixture}`],
+      command.cmd,
+      [...command.opts, 'ts-node', `${__dirname}/../fixtures/${fixture}`],
       {
         name: 'xterm-color',
         cols: 100,

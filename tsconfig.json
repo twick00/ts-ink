@@ -10,10 +10,7 @@
     "lib": ["ES5"],
     "baseUrl": ".",
     "outDir": "dist",
-    "typeRoots": [
-      "./node_modules/@types",
-      "./src/@types"
-    ],
+    "importHelpers": true,
     "types": ["node", "jest"]
   },
   "include": ["src"]

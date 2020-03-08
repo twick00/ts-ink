@@ -65,10 +65,10 @@ const inkHostConfig: InkHostConfig = {
         }
       } else if (key === 'style') {
         setStyle(node, value);
-      } else if (key === 'unstable__transformChildren') {
-        node.unstable__transformChildren = value; // eslint-disable-line camelcase
-      } else if (key === 'unstable__static') {
-        node.unstable__static = true; // eslint-disable-line camelcase
+      } else if (key === '_unstable__transformChildren') {
+        node._unstable__transformChildren = value; // eslint-disable-line camelcase
+      } else if (key === '_unstable__static') {
+        node._unstable__static = true; // eslint-disable-line camelcase
       } else {
         setAttribute(node, key, value);
       }
@@ -93,10 +93,10 @@ const inkHostConfig: InkHostConfig = {
         }
       } else if (key === 'style') {
         setStyle(node, value)
-      } else if (key === 'unstable__transformChildren') {
-        node.unstable__transformChildren = value // eslint-disable-line camelcase
-      } else if (key === 'unstable__static') {
-        node.unstable__static = true // eslint-disable-line camelcase
+      } else if (key === '_unstable__transformChildren') {
+        node._unstable__transformChildren = value // eslint-disable-line camelcase
+      } else if (key === '_unstable__static') {
+        node._unstable__static = true // eslint-disable-line camelcase
       } else {
         setAttribute(node, key, value)
       }
@@ -106,7 +106,7 @@ const inkHostConfig: InkHostConfig = {
   },
   createTextInstance: createTextNode,
   finalizeInitialChildren: (node, type, props, rootNode) => {
-    if (node.unstable__static) {
+    if (node._unstable__static) {
       rootNode.isStaticDirty = true
     }
     return undefined
@@ -132,7 +132,7 @@ const inkHostConfig: InkHostConfig = {
   now: Date.now,
   prepareForCommit: () => {},
   prepareUpdate: (node, type, oldProps, newProps, rootNode) => {
-    if (node.unstable__static) {
+    if (node._unstable__static) {
       rootNode.isStaticDirty = true
     }
     return true

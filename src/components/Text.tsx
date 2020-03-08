@@ -7,14 +7,14 @@ const Text = ({
   underline,
   strikethrough,
   children,
-  unstable__transformChildren
+  _unstable__transformChildren
 }: {
   bold: boolean
   italic: boolean
   underline: boolean
   strikethrough: boolean
   children: any
-  unstable__transformChildren: (children: any) => any
+  _unstable__transformChildren: (children: any) => any
 }) => {
   const transformChildren = (children: string) => {
     if (bold) {
@@ -33,8 +33,8 @@ const Text = ({
       children = chalk.strikethrough(children)
     }
 
-    if (unstable__transformChildren) {
-      children = unstable__transformChildren(children)
+    if (_unstable__transformChildren) {
+      children = _unstable__transformChildren(children)
     }
 
     return children
@@ -44,7 +44,7 @@ const Text = ({
     <span
       style={{ flexDirection: 'row' }}
   // @ts-ignore
-      unstable__transformChildren={transformChildren}
+      _unstable__transformChildren={transformChildren}
     >
       {children}
     </span>
@@ -56,7 +56,7 @@ Text.defaultProps = {
   italic: false,
   underline: false,
   strikethrough: false,
-  unstable__transformChildren: undefined
+  _unstable__transformChildren: undefined
 }
 
 export default Text

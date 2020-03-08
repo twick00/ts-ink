@@ -1,4 +1,3 @@
-import { Chalk } from 'chalk'
 import { YogaNode } from 'yoga-layout'
 import { ReadStream, WriteStream } from 'tty'
 
@@ -11,8 +10,8 @@ export type InkStyle = {
 } & { [key in string]: string | symbol | object | number }
 
 export interface InkElement {
-  unstable__static?: unknown //Probably not necessary anymore
-  unstable__transformChildren?: Function
+  _unstable__static?: unknown
+  _unstable__transformChildren?: unknown
   nodeName: string
   nodeValue?: string
   yogaNode: InkNode
@@ -36,21 +35,6 @@ export interface Options {
   stdout?: WriteStream
   stdin?: ReadStream
   write?: Function
-}
-
-export type ColorPropMethods = {
-  hsl: (args: [number, number, number]) => Chalk
-  hsv: (args: [number, number, number]) => Chalk
-  hwb: (args: [number, number, number]) => Chalk
-  rgb: (args: [number, number, number]) => Chalk
-  bgHsl: (args: [number, number, number]) => Chalk
-  bgHsv: (args: [number, number, number]) => Chalk
-  bgHwb: (args: [number, number, number]) => Chalk
-  bgRgb: (args: [number, number, number]) => Chalk
-  hex: (args: [string]) => Chalk
-  keyword: (args: [string]) => Chalk
-  bgHex: (args: [string]) => Chalk
-  bgKeyword: (args: [string]) => Chalk
 }
 
 export type ColorProps = {
