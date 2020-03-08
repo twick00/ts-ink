@@ -42,6 +42,7 @@
     "lodash": "^4.17.15",
     "log-update": "^4.0.0",
     "node-cache": "^5.1.0",
+    "node-gyp": "^6.1.0",
     "react-reconciler": "^0.24.0",
     "signal-exit": "^3.0.2",
     "slice-ansi": "^4.0.0",
