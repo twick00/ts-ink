@@ -1,17 +1,16 @@
-import { isFunction } from 'lodash'
 import process from 'process'
-import { Options } from './shared'
-import instances from './instances'
-import Instance, { RenderInstance } from './instance'
-import { WriteStream } from 'tty'
+import Instance from './lib/instance'
+import { ReactElement } from 'react'
+import instances from './lib/instances'
 
-export const render = (node, options?: any) => {
+
+export default function(node: ReactElement, options?: any) {
   // Stream was passed instead of `options` object
-  if (typeof options.write === 'function') {
+  if (options && typeof options.write === 'function') {
     options = {
       stdout: options,
       stdin: process.stdin
-    };
+    }
   }
 
   options = {
@@ -19,11 +18,9 @@ export const render = (node, options?: any) => {
     stdin: process.stdin,
     debug: false,
     exitOnCtrlC: true,
-    experimental: false,
     ...options
-  };
-
-  let instance;
+  }
+  let instance: Instance;
   if (instances.has(options.stdout)) {
     instance = instances.get(options.stdout);
   } else {
@@ -31,12 +28,12 @@ export const render = (node, options?: any) => {
     instances.set(options.stdout, instance);
   }
 
-  instance.render(node);
+  instance.render(node)
 
   return {
     rerender: instance.render,
     unmount: () => instance.unmount(),
     waitUntilExit: instance.waitUntilExit,
     cleanup: () => instances.delete(options.stdout)
-  };
-};
+  }
+}

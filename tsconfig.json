@@ -3,8 +3,18 @@
     "module": "commonjs",
     "esModuleInterop": true,
     "target": "es5",
+    "sourceMap": false,
+    "jsx": "react",
+    "noImplicitAny": true,
+    "declaration": true,
+    "lib": ["ES5"],
+    "baseUrl": ".",
     "outDir": "dist",
-    "sourceMap": true,
-    "jsx": "react"
-  }
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/@types"
+    ],
+    "types": ["node", "jest"]
+  },
+  "include": ["src"]
 }

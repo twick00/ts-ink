@@ -1,7 +1,8 @@
-import Yoga, { YogaNode } from 'yoga-layout';
+import Yoga from 'yoga-layout';
 import { flow } from 'lodash';
+import { InkNode } from '../types'
 
-const applyPositionStyles = ({node, style}: {node: YogaNode, style: any}) => {
+const applyPositionStyles = ({node, style}: {node: InkNode, style: any}) => {
   if (!style.position) {
     // TODO: Make sure NaN works
     // @ts-ignore
@@ -14,7 +15,7 @@ const applyPositionStyles = ({node, style}: {node: YogaNode, style: any}) => {
   return {node, style}
 };
 
-const applyMarginStyles = ({node, style}: {node: YogaNode, style: any}) => {
+const applyMarginStyles = ({node, style}: {node: InkNode, style: any}) => {
   node.setMargin(Yoga.EDGE_START, style.marginLeft || style.marginX || style.margin || 0);
   node.setMargin(Yoga.EDGE_END, style.marginRight || style.marginX || style.margin || 0);
   node.setMargin(Yoga.EDGE_TOP, style.marginTop || style.marginY || style.margin || 0);
@@ -22,7 +23,7 @@ const applyMarginStyles = ({node, style}: {node: YogaNode, style: any}) => {
   return {node, style}
 };
 
-const applyPaddingStyles = ({node, style}: {node: YogaNode, style: any}) => {
+const applyPaddingStyles = ({node, style}: {node: InkNode, style: any}) => {
   node.setPadding(Yoga.EDGE_LEFT, style.paddingLeft || style.paddingX || style.padding || 0);
   node.setPadding(Yoga.EDGE_RIGHT, style.paddingRight || style.paddingX || style.padding || 0);
   node.setPadding(Yoga.EDGE_TOP, style.paddingTop || style.paddingY || style.padding || 0);
@@ -30,7 +31,7 @@ const applyPaddingStyles = ({node, style}: {node: YogaNode, style: any}) => {
   return {node, style}
 };
 
-const applyFlexStyles = ({node, style}: {node: YogaNode, style: any}) => {
+const applyFlexStyles = ({node, style}: {node: InkNode, style: any}) => {
   node.setFlexGrow(style.flexGrow || 0);
   node.setFlexShrink(typeof style.flexShrink === 'number' ? style.flexShrink : 1);
 
@@ -97,7 +98,7 @@ const applyFlexStyles = ({node, style}: {node: YogaNode, style: any}) => {
   return {node, style}
 };
 
-const applyDimensionStyles = ({node, style}: {node: YogaNode, style: any}) => {
+const applyDimensionStyles = ({node, style}: {node: InkNode, style: any}) => {
   if (typeof style.width === 'number') {
     node.setWidth(style.width);
   } else if (typeof style.width === 'string') {
@@ -136,6 +137,6 @@ const styleNode = flow([
   applyDimensionStyles
 ])
 
-export const applyStyle = (node: YogaNode, style = {}) => {
+export const applyStyle = (node: InkNode, style = {}) => {
   styleNode({node, style})
 };

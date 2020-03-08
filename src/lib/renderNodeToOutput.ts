@@ -1,9 +1,9 @@
-import { InkElement } from './types'
-import Output from './experimental/output'
+import { InkElement } from '../types'
+import Output from './output'
 import widestLine from 'widest-line'
-import { getMaxWidth, wrapText } from './textUtils'
+import { getMaxWidth, wrapText } from '../textUtils'
 
-const isAllTextNodes = node => {
+const isAllTextNodes = (node:InkElement) => {
   if (node.nodeName === '#text') {
     return true;
   }
@@ -21,13 +21,10 @@ const isAllTextNodes = node => {
   return false;
 };
 
-const squashTextNodes = node => {
-  // If parent container is `<Box>`, text nodes will be treated as separate nodes in
-  // the tree and will have their own coordinates in the layout.
-  // To ensure text nodes are aligned correctly, take X and Y of the first text node
-  // and use them as offset for the rest of the nodes
-  // Only first node is taken into account, because other text nodes can't have margin or padding,
-  // so their coordinates will be relative to the first node anyway
+const squashTextNodes = (node:InkElement) => {
+  if(node.childNodes.length === 0) {
+    return ''
+  }
   const offsetX = node.childNodes[0].yogaNode.getComputedLeft();
   const offsetY = node.childNodes[0].yogaNode.getComputedTop();
 
@@ -79,7 +76,7 @@ export const renderNodeToOutput = (
   const y = offsetY + yogaNode.getComputedTop()
   let newTransformers = transformers;
   if (node.unstable__transformChildren) {
-    newTransformers = [node.unstable__transformChildren, ...transformers];
+    newTransformers.unshift(node.unstable__transformChildren)
   }
 
   // Nodes with only text inside

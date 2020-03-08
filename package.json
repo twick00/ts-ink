@@ -4,19 +4,30 @@
   "main": "src/index.ts",
   "license": "MIT",
   "devDependencies": {
+    "@types/ci-info": "^2.0.0",
+    "@types/jest": "^25.1.3",
     "@types/lodash": "4.14.149",
     "@types/node": "^13.7.0",
     "@types/prettier": "1.19.0",
     "@types/react": "16.9.19",
     "@types/react-reconciler": "^0.18.0",
-    "@types/yoga-layout": "^1.9.1",
+    "@types/signal-exit": "^3.0.0",
+    "@types/slice-ansi": "^2.0.0",
+    "@types/wrap-ansi": "^3.0.0",
+    "@types/yoga-layout": "^1.9",
+    "jest": "^25.1.0",
+    "jest-mock-process": "^1.3.2",
+    "mock-stdin": "^1.0.0",
+    "node-pty": "^0.9.0",
     "prettier": "^1.19.1",
     "react": "^16.12.0",
+    "strip-ansi": "^6.0.0",
+    "ts-jest": "^25.2.1",
     "ts-node": "^8.6.2",
     "typescript": "^3.8.2"
   },
   "scripts": {
-    "start:dev": "ts-node-dev --poll ./tests/Test.tsx"
+    "start:dev": "ts-node-dev --poll test/fixtures/Counter.tsx"
   },
   "dependencies": {
     "add": "^2.0.6",
@@ -24,17 +35,21 @@
     "arrify": "^2.0.1",
     "auto-bind": "^4.0.0",
     "chalk": "^3.0.0",
+    "ci-info": "^2.0.0",
     "cli-cursor": "^3.1.0",
     "cli-truncate": "^2.1.0",
+    "import-jsx": "^3.1.0",
     "lodash": "^4.17.15",
     "log-update": "^4.0.0",
+    "node-cache": "^5.1.0",
     "react-reconciler": "^0.24.0",
     "signal-exit": "^3.0.2",
     "slice-ansi": "^4.0.0",
     "string-length": "^4.0.0",
+    "ts-node-dev": "^1.0.0-pre.44",
     "widest-line": "^3.1.0",
     "wrap-ansi": "^6.2.0",
-    "yoga-layout": "^1.9.3"
+    "yoga-layout": "github:vadimdemedes/yoga-layout-prebuilt"
   },
   "peerDependencies": {
     "react": "*"
@@ -45,5 +60,12 @@
   },
   "resolutions": {
     "@types/react": "16.9.19"
+  },
+  "wallaby": {
+    "env": {
+      "type": "node",
+      "runner": "node"
+    },
+    "autoDetect": true
   }
 }

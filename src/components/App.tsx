@@ -1,30 +1,51 @@
 import React, { PureComponent } from 'react'
-import { noop } from 'lodash'
-import { ReadStream, WriteStream } from 'tty'
-import { render } from '../render'
-import Text from './Text'
-import { Options } from '../shared'
-import cliCursor from 'cli-cursor';
+import { AppContext, StdoutContext, StdinContext } from '../context'
+import { Options } from '../types'
+import cliCursor from 'cli-cursor'
 
-
-export default class App extends PureComponent<Options & {onExit: (error?: Error) => void}, undefined> {
+export default class App extends PureComponent<
+  Options & { onExit: (error?: Error) => void },
+  undefined
+> {
   // Determines if TTY is supported on the provided stdin
-  rawModeEnabledCount
+  rawModeEnabledCount: number //Counter
   isRawModeSupported() {
     return this.props.stdin.isTTY
   }
 
-  constructor(props) {
+  constructor(props: Readonly<Options & { onExit: (error?: Error) => void }>) {
     super(props)
-    this.rawModeEnabledCount = 0;
+    this.rawModeEnabledCount = 0
   }
 
   render() {
-    return this.props.children
+    return (
+      <AppContext.Provider
+        value={{
+          exit: this.handleExit
+        }}
+      >
+        <StdinContext.Provider
+          value={{
+            stdin: this.props.stdin,
+            setRawMode: this.handleSetRawMode,
+            isRawModeSupported: this.isRawModeSupported()
+          }}
+        >
+          <StdoutContext.Provider
+            value={{
+              stdout: this.props.stdout
+            }}
+          >
+            {this.props.children}
+          </StdoutContext.Provider>
+        </StdinContext.Provider>
+      </AppContext.Provider>
+    )
   }
 
   componentDidMount() {
-    cliCursor.hide(this.props.stdout)
+    cliCursor.hide(this.props.stdout /*?*/)
   }
 
   componentWillUnmount() {
@@ -36,20 +57,22 @@ export default class App extends PureComponent<Options & {onExit: (error?: Error
     }
   }
 
-  componentDidCatch(error) {
+  componentDidCatch(error?: Error) {
+    //The only reason this is a class component
     this.handleExit(error)
   }
 
-  handleSetRawMode = isEnabled => {
+  handleSetRawMode = (isEnabled?: boolean) => {
     const { stdin } = this.props
-
     if (!this.isRawModeSupported()) {
       if (stdin === process.stdin) {
         throw new Error(
+          //TODO: update this
           'Raw mode is not supported on the current process.stdin, which Ink uses as input stream by default.\nRead about how to prevent this error on https://github.com/vadimdemedes/ink/#israwmodesupported'
         )
       } else {
         throw new Error(
+          //TODO: update this
           'Raw mode is not supported on the stdin provided to Ink.\nRead about how to prevent this error on https://github.com/vadimdemedes/ink/#israwmodesupported'
         )
       }
@@ -77,14 +100,14 @@ export default class App extends PureComponent<Options & {onExit: (error?: Error
     }
   }
 
-  handleInput = input => {
+  handleInput = (input: string) => {
     // Exit on Ctrl+C
     if (input === '\x03' && this.props.exitOnCtrlC) {
       this.handleExit()
     }
   }
 
-  handleExit = (error?:Error) => {
+  handleExit = (error?: Error) => {
     if (this.isRawModeSupported()) {
       this.handleSetRawMode(false)
     }

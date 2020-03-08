@@ -1,7 +1,7 @@
 import wrapAnsi from 'wrap-ansi'
 import cliTruncate from 'cli-truncate'
 
-export default (text, maxWidth, { textWrap }: { textWrap?: string } = {}) => {
+export default (text: string, maxWidth: number, { textWrap }: { textWrap?: string } = {}) => {
   if (textWrap === 'wrap') {
     return wrapAnsi(text, maxWidth, {
       trim: false,
@@ -10,7 +10,7 @@ export default (text, maxWidth, { textWrap }: { textWrap?: string } = {}) => {
   }
 
   if (String(textWrap).startsWith('truncate')) {
-    let position
+    let position: 'end' | 'middle' | 'start'
 
     if (textWrap === 'truncate' || textWrap === 'truncate-end') {
       position = 'end'
@@ -24,7 +24,7 @@ export default (text, maxWidth, { textWrap }: { textWrap?: string } = {}) => {
       position = 'start'
     }
 
-    return cliTruncate(text, maxWidth, { position })
+    return cliTruncate(text, maxWidth, { position: position })
   }
 
   return text

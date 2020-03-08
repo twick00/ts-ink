@@ -1,10 +1,11 @@
 import measureText from './measureText';
 import wrapText from './wrapText';
 import getMaxWidth from './getMaxWidth';
+import { InkElement } from '../types'
 
 // Since we need to know the width of text container to wrap text, we have to calculate layout twice
 // This function is executed after first layout calculation to reassign width and height of text nodes
-const calculateWrappedText = node => {
+const calculateWrappedText = (node: InkElement) => {
   if (node.textContent && typeof node.parentNode.style.textWrap === 'string') {
     const {yogaNode} = node;
     const parentYogaNode = node.parentNode.yogaNode;

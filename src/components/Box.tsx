@@ -1,6 +1,5 @@
 /* eslint-disable camelcase */
 import React, { PureComponent, ReactNode } from 'react'
-import PropTypes from 'prop-types'
 
 type BoxProps = {
   margin?: number
@@ -42,37 +41,26 @@ type BoxProps = {
   children?: ReactNode
 }
 
-export default class Box extends PureComponent<BoxProps> {
-  nodeRef
+const Box = (props: BoxProps) => {
+  const { children, unstable__transformChildren, ...style } = props
+  const nodeRef = React.useRef()
 
-  static defaultProps = {
-    flexDirection: 'row',
-    flexGrow: 0,
-    flexShrink: 1
-  }
-
-  constructor(props) {
-    super(props)
-
-    this.nodeRef = React.createRef()
-  }
-
-  render() {
-    const { children, unstable__transformChildren, ...style } = this.props
-
-    return (
-      <div
-        ref={this.nodeRef}
-        style={style}
-        // @ts-ignore
-        unstable__transformChildren={unstable__transformChildren}
-      >
-        {children}
-      </div>
-    )
-  }
-
-  unstable__getComputedWidth() {
-    return this.nodeRef.current.yogaNode.getComputedWidth()
-  }
+  return (
+    <div
+      ref={nodeRef}
+      style={style}
+      // @ts-ignore
+      unstable__transformChildren={unstable__transformChildren}
+    >
+      {children}
+    </div>
+  )
 }
+
+Box.defaultProps = {
+  flexDirection: 'row',
+  flexGrow: 0,
+  flexShrink: 1
+}
+
+export default Box

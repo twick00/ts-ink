@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import arrify from 'arrify';
-import chalk from 'chalk';
+import React, { ReactNode } from 'react'
+import arrify from 'arrify'
+import chalk, { Chalk } from 'chalk'
+import { ColorProps } from '../types'
 
 const methods = [
   'hex',
@@ -16,41 +16,41 @@ const methods = [
   'bgHwb',
   'bgRgb',
   'bgKeyword'
-];
+]
 
-const Color = ({children, ...colorProps}) => {
+const Color = ({
+  children,
+  ...colorProps
+}: { children?: ReactNode } & Partial<ColorProps>) => {
   if (children === '') {
-    return null;
+    return null
   }
 
-  const transformChildren = children => {
-    Object.keys(colorProps).forEach(method => {
-      if (colorProps[method]) {
-        if (methods.includes(method)) {
-          children = chalk[method](...arrify(colorProps[method]))(children);
-        } else if (typeof chalk[method] === 'function') {
-          children = chalk[method](children);
+  const transformChildren = (children: string) => {
+    Object.keys(colorProps).forEach((m: keyof ColorProps) => {
+      if (colorProps[m]) {
+        const c: any = chalk
+        if (methods.includes(m)) {
+          children = c[m](...arrify(colorProps[m]))(children)
+        } else if (typeof c[m] === 'function') {
+          children = c[m](children)
         }
       }
-    });
+    })
 
-    return children;
-  };
+
+    return children
+  }
 
   return (
-  // @ts-ignore
-    <span style={{flexDirection: 'row'}} unstable__transformChildren={transformChildren}>
-    {children}
+    <span
+      style={{ flexDirection: 'row' }}
+      // @ts-ignore //
+      unstable__transformChildren={transformChildren}
+    >
+      {children}
     </span>
-);
-};
+  )
+}
 
-Color.propTypes = {
-  children: PropTypes.node
-};
-
-Color.defaultProps = {
-  children: ''
-};
-
-export default Color;
+export default Color

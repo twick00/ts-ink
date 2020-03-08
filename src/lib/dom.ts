@@ -3,8 +3,6 @@ import { measureText } from '../textUtils'
 import { applyStyle } from './applyStyle'
 import { InkElement, InkStyle } from '../types'
 import { isString } from 'lodash'
-import { assertDefined } from '../shared'
-import { RenderInstance } from '../instance'
 
 // Helper utilities implementing some common DOM methods to simplify reconciliation code
 export const createNode: (tagName: string) => InkElement = tagName => ({
@@ -68,11 +66,11 @@ export const setStyle = (node: InkElement, style: InkStyle) => {
   applyStyle(node.yogaNode, style)
 }
 
-export const setAttribute = (node: InkElement, key, value) => {
+export const setAttribute = (node: InkElement, key: string, value: string | object) => {
   node.attributes[key] = value
 }
 
-export const createTextNode = text => {
+export const createTextNode = (text:string) => {
   const node = {
     nodeName: '#text',
     style: {},

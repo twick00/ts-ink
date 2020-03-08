@@ -75,41 +75,41 @@ const inkHostConfig: InkHostConfig = {
     }
   },
   createInstance: (type, newProps) => {
-    const node = createNode(type);
+    const node = createNode(type)
 
     for (const [key, value] of Object.entries(newProps)) {
       if (key === 'children') {
         if (typeof value === 'string' || typeof value === 'number') {
           if (type === 'div') {
             // Text node must be wrapped in another node, so that text can be aligned within container
-            const textNode = createNode('div');
-            setTextContent(textNode, value);
-            appendChildNode(node, textNode);
+            const textNode = createNode('div')
+            setTextContent(textNode, value)
+            appendChildNode(node, textNode)
           }
 
           if (type === 'span') {
-            setTextContent(node, value);
+            setTextContent(node, value)
           }
         }
       } else if (key === 'style') {
-        setStyle(node, value);
+        setStyle(node, value)
       } else if (key === 'unstable__transformChildren') {
-        node.unstable__transformChildren = value; // eslint-disable-line camelcase
+        node.unstable__transformChildren = value // eslint-disable-line camelcase
       } else if (key === 'unstable__static') {
-        node.unstable__static = true; // eslint-disable-line camelcase
+        node.unstable__static = true // eslint-disable-line camelcase
       } else {
-        setAttribute(node, key, value);
+        setAttribute(node, key, value)
       }
     }
 
-    return node;
+    return node
   },
   createTextInstance: createTextNode,
   finalizeInitialChildren: (node, type, props, rootNode) => {
     if (node.unstable__static) {
-      rootNode.isStaticDirty = true;
+      rootNode.isStaticDirty = true
     }
-    return false
+    return undefined
   },
   resetTextContent(instance: InkElement): void {
     if (instance.textContent) {
