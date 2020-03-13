@@ -4,7 +4,7 @@ export default (fixture: string, { env }: { env?: any } = {}) => {
   return new Promise<string>((resolve, reject) => {
     const term = spawn(
       'yarn',
-      ['ts-node', `${__dirname}/../fixtures/${fixture}`],
+      ['--silent','ts-node', `${__dirname}/../fixtures/${fixture}`],
       {
         name: 'xterm-color',
         cols: 100,

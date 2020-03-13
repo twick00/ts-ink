@@ -49,5 +49,5 @@ describe('Static component', () => {
     expect(stripAnsi(output)).toEqual(
       ['#1', '#2', '#3', '#4', '#5', 'Counter: 5'].join('\r\n') + '\r\n'
     )
-  }, 10000) //TODO: make test run faster
+  }, 20000) //TODO: make test run faster
 })
